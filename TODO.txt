@@ -5,3 +5,5 @@
   * **[TODO] Datasheet HC-05 **
   * **[TODO] Rezistente si condensatori aditionali pentru interfatare cu periferice externe **
   * **[TODO] Fire **
+  * **[TODO] Rezistenta pull-up butoane si leduri **
+  * **[TODO] Model realizare proiect - prezentare pe wiki PM **
