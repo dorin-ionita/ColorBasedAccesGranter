@@ -1,0 +1,7 @@
+
+ 
+  * **[TODO] Niste senzori mai ieftini? sau evaluari mai rapide pe un senzor **
+  * **[TODO] Sacaz, Fludor, Letcom **
+  * **[TODO] Datasheet HC-05 **
+  * **[TODO] Rezistente si condensatori aditionali pentru interfatare cu periferice externe **
+  * **[TODO] Fire **
