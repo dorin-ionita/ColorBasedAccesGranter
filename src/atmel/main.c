@@ -95,10 +95,10 @@ typedef enum {
 } state;
 
 typedef enum {
-	False_stimuli;
-	Read_stimuli;
-	Green_stimuli;
-	Blue_stimuli;
+	False_stimuli,
+	Read_stimuli,
+	Green_stimuli,
+	Blue_stimuli,
 } stimuli;
 
 int check_threshold(){
@@ -117,6 +117,7 @@ int check_threshold(){
 int main(void)
 {
 	uint32_t r, g, b;
+	uint32_t r2, g2, b2;
 	init_color_sensor();
 
 	state current_state = None_state;
@@ -156,27 +157,30 @@ int main(void)
 			b2 = b / smallest;
 
 			if (r2 == 10 && smallest > 200) {
-				sprintf(buffer2, "White");
-				PORTB |= (1 << PB0);
-				PORTB |= (1 << PB1);
-				PORTB |= (1 << PB2);
+				// PORTB |= (1 << PB0);
+				// PORTB |= (1 << PB1);
+				// PORTB |= (1 << PB2);
 			}
 			else if (g2 > b2 && g2 > r2 && r2 >= 8 && r2 <= 12) {
 				// sprintf(buffer2, "Green");
 				// PORTB |= (1 << PB1);
 				PORTB ^= (1 << PB5);
-				_delay_ms(4000);
+				_delay_ms(500);
 				PORTB ^= (1 << PB5);
 			}
 			else if (b2 > g2 && b2 >= 15 && r2 <= 12) {
 				// sprintf(buffer2, "Blue");
-				// PORTB |= (1 << PB2);
+				PORTB ^= (1 << PB6);
+				PORTB ^= (1 << PB5);
+				_delay_ms(500);
+				PORTB ^= (1 << PB5);
+				PORTB ^= (1 << PB6);
 			}
 			else if (r2 > b2 && b2 <= 12 && g2 <= 12) {
 				// sprintf(buffer2, "Red");
 				// PORTB |= (1 << PB0);
 				PORTB ^= (1 << PB6);
-				_delay_ms(4000);
+				_delay_ms(500);
 				PORTB ^= (1 << PB6);
 			}
 

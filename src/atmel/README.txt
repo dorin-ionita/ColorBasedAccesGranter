@@ -10,3 +10,4 @@ Pasi:
 TODO:
 Elimina OE din bibilioteca.
 Ce fac DDA si nebunia cealalta? PINA de exemplu.
+Trebuie calibrat.
