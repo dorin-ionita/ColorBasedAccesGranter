@@ -2,6 +2,7 @@
 #include <util/delay.h>
 #include "tcs3200.h"
 #include "hc05.h"
+#include "usart.h"
 
 #define TRUE 	  		1
 #define FALSE	  		0
@@ -120,6 +121,8 @@ int main(void)
 	uint32_t r2, g2, b2;
 	init_color_sensor();
 
+	USART0_init();
+
 	state current_state = None_state;
 	DDRB |= (1 << PB6) & (1 << PB5);
 
@@ -133,6 +136,7 @@ int main(void)
 			TCSLEDOff();
 
 			// Measure RGB Values
+			USART0_transmit('p');
 
 			uint32_t smallest;
 		
