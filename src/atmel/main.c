@@ -11,6 +11,24 @@
 #define DELAY_POLL		50
 #define WAIT_ATTEMPT	4000
 
+#define MIN_RED_R		4000
+#define MAX_RED_R		7500
+#define RED_G			1
+#define MIN_RED_B		16000
+#define MAX_RED_B		18000
+
+#define MIN_BLUE_R		18000
+#define MAX_BLUE_R		21500
+#define BLUE_G			0
+#define MIN_BLUE_B		22000
+#define MAX_BLUE_B		25000
+
+#define MIN_GREEN_R		21500
+#define MAX_GREEN_R		25000
+#define GREEN_G			0
+#define MIN_GREEN_B		27000
+#define MAX_GREEN_B		30000
+
 void init_color_sensor(void)
 {
 	// Init Color Sensor
@@ -119,7 +137,7 @@ int check_threshold(){
 int main(void)
 {
 	uint32_t r, g, b;
-	uint32_t r2, g2, b2;
+	int r2, g2, b2;
 	init_color_sensor();
 
 	char values[20];
@@ -141,6 +159,7 @@ int main(void)
 
 			// Measure RGB Values
 			sprintf(values, "%d %d %d", r, g, b);
+			sscanf(values, "%d%d%d", &r2, &g2, &b2);
 			int i;
 			for (i = 0; i < strlen(values); i++){
 				USART0_transmit(values[i]);
@@ -148,41 +167,16 @@ int main(void)
 			USART0_transmit('\n');
 			// USART0_transmit('p');
 
-			uint32_t smallest;
-		
-			if(r < b)
-			{
-				if(r < g)
-					smallest = r;
-				else
-					smallest = g;
-			}
-			else
-			{
-				if(b < g)
-					smallest = b;
-				else
-					smallest = g;	
-			}
-
-			smallest = smallest / 10;
-			r2 = r / smallest;
-			g2 = g / smallest;
-			b2 = b / smallest;
-
-			if (r2 == 10 && smallest > 200) {
-				// PORTB |= (1 << PB0);
-				// PORTB |= (1 << PB1);
-				// PORTB |= (1 << PB2);
-			}
-			else if (g2 > b2 && g2 > r2 && r2 >= 8 && r2 <= 12) {
+			if (r2 > MIN_GREEN_R && r2 < MAX_GREEN_R &&
+				b2 > MIN_GREEN_B && b2 < MAX_GREEN_B) {
 				// sprintf(buffer2, "Green");
 				// PORTB |= (1 << PB1);
 				PORTB ^= (1 << PB5);
 				_delay_ms(500);
 				PORTB ^= (1 << PB5);
 			}
-			else if (b2 > g2 && b2 >= 15 && r2 <= 12) {
+			else if (r2 > MIN_BLUE_R && r2 < MAX_BLUE_R &&
+					 b2 > MIN_BLUE_B && b2 < MAX_BLUE_B) {
 				// sprintf(buffer2, "Blue");
 				PORTB ^= (1 << PB6);
 				PORTB ^= (1 << PB5);
@@ -190,7 +184,8 @@ int main(void)
 				PORTB ^= (1 << PB5);
 				PORTB ^= (1 << PB6);
 			}
-			else if (r2 > b2 && b2 <= 12 && g2 <= 12) {
+			else if (r2 > MIN_RED_R && r2 < MAX_RED_R &&
+					 b2 > MIN_RED_B && b2 < MAX_RED_B) {
 				// sprintf(buffer2, "Red");
 				// PORTB |= (1 << PB0);
 				PORTB ^= (1 << PB6);
