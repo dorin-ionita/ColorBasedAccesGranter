@@ -3,6 +3,7 @@
 #include "tcs3200.h"
 #include "hc05.h"
 #include "usart.h"
+#include <string.h>
 
 #define TRUE 	  		1
 #define FALSE	  		0
@@ -121,6 +122,9 @@ int main(void)
 	uint32_t r2, g2, b2;
 	init_color_sensor();
 
+	char values[20];
+	values[0] = '\0';
+
 	USART0_init();
 
 	state current_state = None_state;
@@ -136,7 +140,13 @@ int main(void)
 			TCSLEDOff();
 
 			// Measure RGB Values
-			USART0_transmit('p');
+			sprintf(values, "%d %d %d", r, g, b);
+			int i;
+			for (i = 0; i < strlen(values); i++){
+				USART0_transmit(values[i]);
+			}
+			USART0_transmit('\n');
+			// USART0_transmit('p');
 
 			uint32_t smallest;
 		
