@@ -84,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
                     String readMessage = null;
                     try {
                         readMessage = new String((byte[]) msg.obj, "UTF-8");
+                        //Toast.makeText(getApplicationContext(), "simple toast", Toast.LENGTH_LONG);
+                        if (readMessage.substring(0,1).compareTo("A") == 0)
+                            Toast.makeText(getApplicationContext(), "Acces Granted. Esti bo$$, Imparate!", Toast.LENGTH_LONG).show();
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
