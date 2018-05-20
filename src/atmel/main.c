@@ -29,6 +29,8 @@
 #define MIN_GREEN_B		27000
 #define MAX_GREEN_B		30000
 
+#define BLUETOOTH_DEBUG
+
 void init_color_sensor(void)
 {
 	// Init Color Sensor
@@ -115,11 +117,70 @@ typedef enum {
 } state;
 
 typedef enum {
-	False_stimuli,
-	Read_stimuli,
-	Green_stimuli,
-	Blue_stimuli,
-} stimuli;
+	false_color,
+	red_color,
+	green_color,
+	blue_color
+} color;
+
+color get_current_color(){
+	color color_stimuli = false_color;
+	uint32_t r, g, b;
+	int r2, g2, b2;
+
+	char values[20];
+	values[0] = '\0';
+
+	TCSLEDOn();
+	r = MeasureR();
+	g = MeasureG();
+	b = MeasureB();
+	TCSLEDOff();
+
+	// Measure RGB Values
+	sprintf(values, "%d %d %d", r, g, b);
+	sscanf(values, "%d%d%d", &r2, &g2, &b2);
+
+	#ifdef BLUETOOTH_DEBUG
+	{
+		int i;
+		for (i = 0; i < strlen(values); i++){
+			USART0_transmit(values[i]);
+		}
+		USART0_transmit('\n');
+	}
+	#endif
+
+	if (r2 > MIN_GREEN_R && r2 < MAX_GREEN_R &&
+		b2 > MIN_GREEN_B && b2 < MAX_GREEN_B) {
+		color_stimuli = green_color;
+		// sprintf(buffer2, "Green");
+		// PORTB |= (1 << PB1);
+		PORTB ^= (1 << PB5);
+		_delay_ms(500);
+		PORTB ^= (1 << PB5);
+	}
+	else if (r2 > MIN_BLUE_R && r2 < MAX_BLUE_R &&
+			 b2 > MIN_BLUE_B && b2 < MAX_BLUE_B) {
+		// sprintf(buffer2, "Blue");
+		color_stimuli = blue_color;
+		PORTB ^= (1 << PB6);
+		PORTB ^= (1 << PB5);
+		_delay_ms(500);
+		PORTB ^= (1 << PB5);
+		PORTB ^= (1 << PB6);
+	}
+	else if (r2 > MIN_RED_R && r2 < MAX_RED_R &&
+			 b2 > MIN_RED_B && b2 < MAX_RED_B) {
+		color_stimuli = red_color;
+		// sprintf(buffer2, "Red");
+		// PORTB |= (1 << PB0);
+		PORTB ^= (1 << PB6);
+		_delay_ms(500);
+		PORTB ^= (1 << PB6);
+	} 
+	return color_stimuli;
+}
 
 int check_threshold(){
 	TCSLEDOn();
@@ -134,72 +195,50 @@ int check_threshold(){
 	return (d > THRESHOLD ? TRUE : FALSE);
 }
 
+
 int main(void)
 {
-	uint32_t r, g, b;
-	int r2, g2, b2;
+	color current_color;
+	state current_state = None_state;
+
 	init_color_sensor();
-
-	char values[20];
-	values[0] = '\0';
-
 	USART0_init();
 
-	state current_state = None_state;
 	DDRB |= (1 << PB6) & (1 << PB5);
 
 	while (TRUE){
 		if (check_threshold()){
-			
-			TCSLEDOn();
-			r = MeasureR();
-			g = MeasureG();
-			b = MeasureB();
-			TCSLEDOff();
-
-			// Measure RGB Values
-			sprintf(values, "%d %d %d", r, g, b);
-			sscanf(values, "%d%d%d", &r2, &g2, &b2);
-			int i;
-			for (i = 0; i < strlen(values); i++){
-				USART0_transmit(values[i]);
+			current_color = get_current_color();
+			switch (current_state){
+				case None_state:
+					if (current_color == green_color)
+						current_state = Green_state; 
+					break;
+				case Green_state:
+					if (current_color == blue_color)
+						current_state = Blue_state;
+					else if (current_color == red_color)
+						current_state = None_state;
+					break;
+				case Blue_state:
+					if (current_color == red_color){
+						current_state == Red_state;
+						USART0_transmit('A');
+						USART0_transmit('G');
+					} else if (current_color == green_color)
+						current_state = None_state;
+					break;
+				case Red_state:
+					if (current_color != red_color)
+						current_state = None_state;
+					break;
+				default:
+					continue;
 			}
-			USART0_transmit('\n');
-			// USART0_transmit('p');
-
-			if (r2 > MIN_GREEN_R && r2 < MAX_GREEN_R &&
-				b2 > MIN_GREEN_B && b2 < MAX_GREEN_B) {
-				// sprintf(buffer2, "Green");
-				// PORTB |= (1 << PB1);
-				PORTB ^= (1 << PB5);
-				_delay_ms(500);
-				PORTB ^= (1 << PB5);
-			}
-			else if (r2 > MIN_BLUE_R && r2 < MAX_BLUE_R &&
-					 b2 > MIN_BLUE_B && b2 < MAX_BLUE_B) {
-				// sprintf(buffer2, "Blue");
-				PORTB ^= (1 << PB6);
-				PORTB ^= (1 << PB5);
-				_delay_ms(500);
-				PORTB ^= (1 << PB5);
-				PORTB ^= (1 << PB6);
-			}
-			else if (r2 > MIN_RED_R && r2 < MAX_RED_R &&
-					 b2 > MIN_RED_B && b2 < MAX_RED_B) {
-				// sprintf(buffer2, "Red");
-				// PORTB |= (1 << PB0);
-				PORTB ^= (1 << PB6);
-				_delay_ms(500);
-				PORTB ^= (1 << PB6);
-			}
-
-			//_delay_ms(WAIT_ATTEMPT);
 		}
 		_delay_ms(DELAY_POLL);
 		// check for a threshold
 	}
 
 	return 0;
-
-
 }
