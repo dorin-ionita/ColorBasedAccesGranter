@@ -4791,34 +4791,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="docu-dummy" urn="urn:adsk.eagle:library:215">
-<description>Dummy symbols</description>
-<packages>
-</packages>
-<symbols>
-<symbol name="CAPACITOR" urn="urn:adsk.eagle:symbol:13164/1" library_version="1">
-<wire x1="0" y1="-5.08" x2="0" y2="-2.032" width="0.1524" layer="94"/>
-<wire x1="0" y1="-0.508" x2="0" y2="2.54" width="0.1524" layer="94"/>
-<rectangle x1="-2.032" y1="-2.032" x2="2.032" y2="-1.524" layer="94"/>
-<rectangle x1="-2.032" y1="-1.016" x2="2.032" y2="-0.508" layer="94"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="C" urn="urn:adsk.eagle:component:13175/1" prefix="C" library_version="1">
-<description>&lt;b&gt;CAPACITOR&lt;/b&gt;</description>
-<gates>
-<gate name="G$1" symbol="CAPACITOR" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="Bluetooth HC-05">
 <description>Bluetooth HC05 Module. See http://mcuoneclipse.com/2013/02/14/bluetooth-with-the-freedom-board/</description>
 <packages>
@@ -5133,7 +5105,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R3" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="0411/12" package3d_urn="urn:adsk.eagle:package:26091/1"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C1" library="docu-dummy" library_urn="urn:adsk.eagle:library:215" deviceset="C" device=""/>
 <part name="VDD1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VDD" device=""/>
 <part name="U1" library="Bluetooth HC-05" deviceset="HC_05" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -5168,7 +5139,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="R3" gate="G$1" x="144.78" y="38.1" rot="R270"/>
 <instance part="GND1" gate="1" x="144.722478125" y="43.737821875" rot="R180"/>
 <instance part="GND2" gate="1" x="228.6" y="119.38" rot="R90"/>
-<instance part="C1" gate="G$1" x="218.44" y="109.22" rot="R90"/>
 <instance part="VDD1" gate="G$1" x="231.14" y="109.22" rot="R270"/>
 <instance part="U1" gate="G$1" x="220.98" y="45.72"/>
 <instance part="GND3" gate="1" x="198.12" y="27.94"/>
@@ -5536,16 +5506,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="172.72" y1="33.02" x2="198.12" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$2" class="0">
-<segment>
-<portref moduleinst="TCS230-1" port="VDD"/>
-<wire x1="200.66" y1="109.22" x2="215.9" y2="109.22" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="VDD" class="0">
 <segment>
 <pinref part="VDD1" gate="G$1" pin="VDD"/>
-<wire x1="223.52" y1="109.22" x2="228.6" y2="109.22" width="0.1524" layer="91"/>
+<portref moduleinst="TCS230-1" port="VDD"/>
+<wire x1="200.66" y1="109.22" x2="228.6" y2="109.22" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">

@@ -4960,6 +4960,125 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="display-hp" urn="urn:adsk.eagle:library:212">
+<description>&lt;b&gt;Hewlett Packard LED Displays&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="HLMP6" urn="urn:adsk.eagle:footprint:12942/1" library_version="1">
+<description>&lt;b&gt;LED&lt;/b&gt;&lt;p&gt;
+2 mm horizontal, RM 2.54 mm</description>
+<wire x1="-2.413" y1="-1.27" x2="2.921" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="1.27" x2="2.921" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="2.921" y1="1.27" x2="-2.413" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="-1.27" x2="-2.413" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="-2.794" y1="-0.889" x2="-2.794" y2="0.889" width="0.1524" layer="21" curve="-180"/>
+<wire x1="-2.794" y1="0.889" x2="-2.413" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="0.889" x2="-2.413" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-2.794" y1="-0.889" x2="-2.413" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="-2.413" y1="-0.889" x2="-2.413" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-2.794" y1="0.635" x2="-2.794" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.048" y1="0.508" x2="-3.048" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="-3.302" y1="0.254" x2="-3.302" y2="-0.254" width="0.1524" layer="21"/>
+<pad name="A" x="-1.27" y="0" drill="0.8128" shape="long" rot="R90"/>
+<pad name="K" x="1.27" y="0" drill="0.8128" shape="long" rot="R90"/>
+<text x="3.429" y="0.127" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.429" y="-1.397" size="1.27" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="HLMP6" urn="urn:adsk.eagle:package:12992/1" type="box" library_version="1">
+<description>LED
+2 mm horizontal, RM 2.54 mm</description>
+<packageinstances>
+<packageinstance name="HLMP6"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="LED" urn="urn:adsk.eagle:symbol:12940/1" library_version="1">
+<wire x1="1.27" y1="2.54" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="1.27" y1="0" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="0" width="0.254" layer="94"/>
+<wire x1="1.27" y1="2.54" x2="0" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="5.08" x2="0" y2="2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="2.54" x2="-1.27" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.032" y1="1.778" x2="-3.429" y2="0.381" width="0.1524" layer="94"/>
+<wire x1="-3.429" y1="0.381" x2="-2.54" y2="0.762" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0.762" x2="-3.048" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="-3.048" y1="1.27" x2="-3.429" y2="0.381" width="0.1524" layer="94"/>
+<wire x1="-3.302" y1="-0.762" x2="-2.413" y2="-0.381" width="0.1524" layer="94"/>
+<wire x1="-2.413" y1="-0.381" x2="-2.921" y2="0.127" width="0.1524" layer="94"/>
+<wire x1="-2.921" y1="0.127" x2="-3.302" y2="-0.762" width="0.1524" layer="94"/>
+<wire x1="-1.905" y1="0.635" x2="-3.302" y2="-0.762" width="0.1524" layer="94"/>
+<text x="3.302" y="-1.524" size="1.778" layer="95" rot="R90">&gt;NAME</text>
+<text x="5.461" y="-1.524" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="K" x="0" y="-2.54" visible="off" length="short" direction="pas" rot="R90"/>
+<pin name="A" x="0" y="5.08" visible="off" length="point" direction="pas" rot="R270"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="HLMP6" urn="urn:adsk.eagle:component:13019/1" prefix="D" library_version="1">
+<description>&lt;b&gt;LED&lt;/b&gt;&lt;p&gt;
+2mm horizontal</description>
+<gates>
+<gate name="A" symbol="LED" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="HLMP6">
+<connects>
+<connect gate="A" pin="A" pad="A"/>
+<connect gate="A" pin="K" pad="K"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:12992/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="MF" value="AGILENT TECHNOLOGIES" constant="no"/>
+<attribute name="MPN" value="HLMP-6500" constant="no"/>
+<attribute name="OC_FARNELL" value="1652490" constant="no"/>
+<attribute name="OC_NEWARK" value="40K0088" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="ngspice-simulation" urn="urn:adsk.eagle:library:527439">
+<description>SPICE compatible library parts</description>
+<packages>
+</packages>
+<symbols>
+<symbol name="0" urn="urn:adsk.eagle:symbol:527455/1" library_version="16">
+<description>Simulation ground symbol (spice node 0)</description>
+<wire x1="-2.54" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="2.54" y1="0" x2="0" y2="-2.54" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-2.54" y2="0" width="0.1524" layer="94"/>
+<pin name="0" x="0" y="0" visible="off" length="point" direction="sup"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GND" urn="urn:adsk.eagle:component:527478/1" prefix="X_" library_version="16">
+<description>Simulation ground symbol (spice node 0)</description>
+<gates>
+<gate name="G$1" symbol="0" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name="">
+<attribute name="SPICEGROUND" value=""/>
+<attribute name="_EXTERNAL_" value=""/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -5019,6 +5138,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="U1" library="Bluetooth HC-05" deviceset="HC_05" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
+<part name="R2" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="0204/2V" package3d_urn="urn:adsk.eagle:package:25948/1"/>
+<part name="R4" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="0204/2V" package3d_urn="urn:adsk.eagle:package:25948/1"/>
+<part name="D1" library="display-hp" library_urn="urn:adsk.eagle:library:212" deviceset="HLMP6" device="" package3d_urn="urn:adsk.eagle:package:12992/1"/>
+<part name="D2" library="display-hp" library_urn="urn:adsk.eagle:library:212" deviceset="HLMP6" device="" package3d_urn="urn:adsk.eagle:package:12992/1"/>
+<part name="X_1" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
+<part name="X_2" library="ngspice-simulation" library_urn="urn:adsk.eagle:library:527439" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5048,6 +5173,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="U1" gate="G$1" x="220.98" y="45.72"/>
 <instance part="GND3" gate="1" x="198.12" y="27.94"/>
 <instance part="P+1" gate="VCC" x="182.88" y="22.86" rot="R90"/>
+<instance part="R2" gate="G$1" x="160.02" y="81.28"/>
+<instance part="R4" gate="G$1" x="149.86" y="66.04"/>
+<instance part="D1" gate="A" x="170.18" y="81.28" rot="R90"/>
+<instance part="D2" gate="A" x="160.02" y="66.04" rot="R90"/>
+<instance part="X_1" gate="G$1" x="172.72" y="81.28" rot="R90"/>
+<instance part="X_2" gate="G$1" x="162.56" y="66.04" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -5109,9 +5240,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </net>
 <net name="PB6" class="0">
 <segment>
-<wire x1="118.11" y1="78.74" x2="128.27" y2="78.74" width="0.1524" layer="91"/>
 <label x="123.19" y="78.74" size="1.778" layer="95"/>
 <pinref part="IC2" gate="G$1" pin="(MISO)PB6"/>
+<wire x1="118.11" y1="78.74" x2="139.7" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="78.74" x2="139.7" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="139.7" y1="66.04" x2="144.78" y2="66.04" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="PB5" class="0">
@@ -5123,9 +5257,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </net>
 <net name="PB7" class="0">
 <segment>
-<wire x1="118.11" y1="81.28" x2="128.27" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="118.11" y1="81.28" x2="127" y2="81.28" width="0.1524" layer="91"/>
 <label x="123.19" y="81.28" size="1.778" layer="95"/>
 <pinref part="IC2" gate="G$1" pin="(SCK)PB7"/>
+<wire x1="127" y1="81.28" x2="128.27" y2="81.28" width="0.1524" layer="91"/>
+<wire x1="128.27" y1="81.28" x2="154.94" y2="81.28" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="PB4" class="0">
@@ -5423,6 +5560,28 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <pinref part="U1" gate="G$1" pin="TX"/>
 <wire x1="165.1" y1="48.26" x2="177.8" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="60.96" x2="198.12" y2="60.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="R2" gate="G$1" pin="2"/>
+<pinref part="D1" gate="A" pin="A"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="R4" gate="G$1" pin="2"/>
+<pinref part="D2" gate="A" pin="A"/>
+</segment>
+</net>
+<net name="0" class="0">
+<segment>
+<pinref part="D1" gate="A" pin="K"/>
+<pinref part="X_1" gate="G$1" pin="0"/>
+</segment>
+<segment>
+<pinref part="D2" gate="A" pin="K"/>
+<pinref part="X_2" gate="G$1" pin="0"/>
 </segment>
 </net>
 </nets>
